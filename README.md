@@ -5,6 +5,14 @@ Deploy your Copr build service
 
 ![arch](https://raw.githubusercontent.com/1dot75cm/copr-deploy/master/snapshot/copr_arch.png)
 
+- 前端 (httpd fe+be) 接收用户提交 srpm 包 url，并发送 Json 构建请求；
+- 后端 (backend service) 轮询前端提交的新版本；
+- 当发现新版本时，后端 (backend service) 使用 ansible playbook 在 Builder Server 创建新 builder 实例；
+- 通知前端开始构建实例 (Starting)；
+- 提交附加的 pkg/repo 等，由 mock 建立实例，之后返回 Running 状态；
+- 检索编译结果并保存至 results 目录；
+- 返回并更新构建状态 (Succeeded/Failed)。
+
 ## 文件说明
 
 - ansible/： ansible 脚本
@@ -20,7 +28,7 @@ Deploy your Copr build service
 > ```
 
 2. 创建虚拟机    
-创建一台虚拟机作为 Builder。如果你不想在物理机中部署 Web 部分，则需要创建另一台虚拟机来运行 Docker。
+创建一台虚拟机作为 Builder。如果你不想在物理机的 Docker 中部署 Web 部分，则需要创建另一台虚拟机来运行 Docker。
 
 3. 依次检查/执行 *.sh 脚本，来准备环境
 > ```
