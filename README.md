@@ -18,8 +18,13 @@ Deploy your Copr build service
 - ansible/： ansible 脚本
 - docker/： Dockerfile 文件
 - *.sh： 准备环境的脚本
+- rpms/： rpm spec 文件
 
 ## 安装步骤
+
+0. 部署所需 rpm 包   
+部署所需的 rpm 包在 [mosquito/copr](https://copr.fedoraproject.org/coprs/mosquito/copr), [mosquito/nginx](https://copr.fedoraproject.org/coprs/mosquito/nginx), [mosquito/docker](https://copr.fedoraproject.org/coprs/mosquito/docker)。   
+如需自定义 rpm 包，可修改 rpms/ 中的 spec 文件，并使用 rpmbuild 编译。
 
 1. 克隆 git 库
 > ```
